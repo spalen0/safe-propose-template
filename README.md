@@ -90,9 +90,13 @@ tab (workflow_dispatch).
 
 ## Running locally
 
+Set `SAFE_PROPOSE_REF` to the same reviewed commit SHA as the repository variable used
+by CI, then install that revision:
+
 ```bash
 python -m venv .venv && . .venv/bin/activate
-pip install "safe-propose @ git+https://github.com/spalen0/safe-propose.git@master"
+export SAFE_PROPOSE_REF="<reviewed-commit-sha>"
+pip install "safe-propose @ git+https://github.com/spalen0/safe-propose.git@${SAFE_PROPOSE_REF}"
 # plus the anvil binary: https://book.getfoundry.sh/getting-started/installation
 export ETH_RPC=... ETH_SAFE_ADDRESS=0x...
 safe-propose dry-run --fn smoke_test --network ethereum
